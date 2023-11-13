@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+//продукт с полями
 @Entity
 @Table(name = "orders")
 @Data
