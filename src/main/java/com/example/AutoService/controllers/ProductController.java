@@ -1,7 +1,14 @@
 package com.example.AutoService.controllers;
 
+import com.example.AutoService.models.Assignment;
+import com.example.AutoService.models.Mechanic;
 import com.example.AutoService.models.Product;
+import com.example.AutoService.services.AssignmentService;
+import com.example.AutoService.services.MechanicService;
 import com.example.AutoService.services.ProductService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,15 +17,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 //Методы для обработки запросов
 @Controller
-@RequiredArgsConstructor
+@Data
+@AllArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private final AssignmentService assignmentService;
 
     @GetMapping("/")
     public String products(@RequestParam(name = "title", required = false) String title, Model model) {
         model.addAttribute("products", productService.listProducts(title));
+
+        // Add all assignments to the model
+        List<Assignment> allAssignments = assignmentService.getAllAssignments();
+        model.addAttribute("allAssignments", allAssignments);
+
         return "products";
     }
 
