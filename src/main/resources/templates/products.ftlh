@@ -31,12 +31,5 @@
 <#else>
     <h3>Заказов нет</h3>
 </#list>
-<hr>
-<h3>Создать новый заказ</h3>
-<form action="/product/create" method="post">
-    Имя клиента: <input type="text" name="title"/><br><br>
-    Описание заказа: <input type="text" name="description"/><br><br>
-    <input type="submit" value="Добавить товар"/>
-</form>
 </body>
 </html>

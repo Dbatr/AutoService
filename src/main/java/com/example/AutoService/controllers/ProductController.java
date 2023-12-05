@@ -1,15 +1,11 @@
 package com.example.AutoService.controllers;
 
 import com.example.AutoService.models.Assignment;
-import com.example.AutoService.models.Mechanic;
 import com.example.AutoService.models.Product;
 import com.example.AutoService.services.AssignmentService;
-import com.example.AutoService.services.MechanicService;
 import com.example.AutoService.services.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

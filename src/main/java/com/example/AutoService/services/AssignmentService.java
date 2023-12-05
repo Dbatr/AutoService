@@ -28,7 +28,7 @@ public class AssignmentService {
             // Получаем механика, рабочее место и продукт по их ID
             Mechanic mechanic = mechanicService.getMechanicById(2L);
             Workspace workspace = workspaceService.getWorkspaceById(3L);
-            Product product = productService.getProductById(402L);
+            Product product = productService.getProductById(755L);
 
             // Проверяем, что объекты не null
             if (mechanic != null && workspace != null && product != null) {

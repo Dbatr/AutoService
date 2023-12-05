@@ -2,6 +2,7 @@ package com.example.AutoService;
 
 import com.example.AutoService.services.AssignmentService;
 import com.example.AutoService.services.MechanicService;
+import com.example.AutoService.services.ProductService;
 import com.example.AutoService.services.WorkspaceService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,11 +17,12 @@ public class AutoServiceApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initializeData(MechanicService mechanicService, WorkspaceService workspaceService, AssignmentService assignmentService) {
+	public CommandLineRunner initializeData(MechanicService mechanicService, WorkspaceService workspaceService, AssignmentService assignmentService, ProductService productService) {
 		return args -> {
 			mechanicService.initializeMechanicsData();
 			workspaceService.initializeWorkspacesData();
 			assignmentService.initializeAssignmentsData();
+			productService.initializeProductData();
 		};
 	}
 }

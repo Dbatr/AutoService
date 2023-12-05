@@ -15,7 +15,6 @@ import java.util.List;
 public class MechanicService {
     private final MechanicRepository mechanicRepository;
 
-
     public void initializeMechanicsData() {
         long count = mechanicRepository.count();
 
