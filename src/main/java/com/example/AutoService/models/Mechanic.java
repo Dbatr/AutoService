@@ -34,4 +34,9 @@ public class Mechanic {
 
     @Column(name = "PreferredCarBrands")
     private String preferredCarBrands;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "UserId", referencedColumnName = "UserId")
+    private User user;
+
 }

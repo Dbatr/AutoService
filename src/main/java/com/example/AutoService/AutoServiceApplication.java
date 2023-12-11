@@ -21,8 +21,8 @@ public class AutoServiceApplication {
 		return args -> {
 			mechanicService.initializeMechanicsData();
 			workspaceService.initializeWorkspacesData();
-			assignmentService.initializeAssignmentsData();
 			productService.initializeProductData();
+			assignmentService.initializeAssignmentsData();
 		};
 	}
 }

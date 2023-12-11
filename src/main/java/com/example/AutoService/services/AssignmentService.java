@@ -26,9 +26,10 @@ public class AssignmentService {
     public void initializeAssignmentsData() {
         if (assignmentRepository.count() == 0) {
             // Получаем механика, рабочее место и продукт по их ID
+            // здесь потом админ будет ставить
             Mechanic mechanic = mechanicService.getMechanicById(2L);
             Workspace workspace = workspaceService.getWorkspaceById(3L);
-            Product product = productService.getProductById(755L);
+            Product product = productService.getProductById(4L);
 
             // Проверяем, что объекты не null
             if (mechanic != null && workspace != null && product != null) {
