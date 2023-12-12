@@ -4,7 +4,7 @@
     <title>Autoservice</title>
 </head>
 <body>
-<h1>Autoservice</h1><hr>
+<h1>Autoservice | <a href="/login">Войти</a></h1><hr>
 <h4>Заказы</h4>
 <form action="/" method="get">
     Поиск по имени: <input type="text" name="title"><br>

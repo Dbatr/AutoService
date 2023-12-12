@@ -6,6 +6,7 @@ import com.example.AutoService.models.User;
 import com.example.AutoService.models.enums.Role;
 import com.example.AutoService.repositories.AssignmentRepository;
 import com.example.AutoService.repositories.MechanicRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MechanicService {
     private final MechanicRepository mechanicRepository;
-
+    private final PasswordEncoder passwordEncoder;
 
     public void initializeMechanicsData() {
         long count = mechanicRepository.count();
@@ -27,7 +28,7 @@ public class MechanicService {
             List<Mechanic> mechanics = Arrays.asList(
                     new Mechanic(null, "Алексей", "Смирнов", "Двигатель",
                             5, "Да", "Местные модели, Японские автомобили",
-                            createMechanicUser("alexei", "smirnov", "89123456789", Role.ROLE_USER)),
+                            createMechanicUser("alexei@gmail.com", "smirnov", "89123456789", Role.ROLE_USER)),
                     new Mechanic(null, "Дмитрий", "Козлов", "Подвеска",
                             8, "Нет", "Немецкие, Французские и Итальянские автомобили",
                             createMechanicUser("dmitriy", "kozlov", "89129876543", Role.ROLE_USER)),
@@ -48,7 +49,8 @@ public class MechanicService {
     private User createMechanicUser(String login, String password, String phoneNumber, Role... roles) {
         User user = new User();
         user.setLogin(login);
-        user.setPassword(password);
+        String encodedPassword = passwordEncoder.encode(password);
+        user.setPassword(encodedPassword);
         user.setPhoneNumber(phoneNumber);
         user.setActive(true);
         user.setRoles(new HashSet<>(Arrays.asList(roles)));
