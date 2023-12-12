@@ -8,9 +8,5 @@
 <h4>Подробная информация о заказе</h4>
 <b>Имя клиента: </b>${product.title}<br>
 <b>Описание проблемы: </b>${product.description}<br>
-<form action="/product/delete/${product.id}" method="post">
-<#--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
-    <input type="submit" value="Данный заказ выполнен. Убрать из списка"/>
-</form>
 </body>
 </html>

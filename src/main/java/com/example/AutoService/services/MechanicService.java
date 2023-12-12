@@ -31,21 +31,22 @@ public class MechanicService {
                             createMechanicUser("alexei@gmail.com", "smirnov", "89123456789", Role.ROLE_USER)),
                     new Mechanic(null, "Дмитрий", "Козлов", "Подвеска",
                             8, "Нет", "Немецкие, Французские и Итальянские автомобили",
-                            createMechanicUser("dmitriy", "kozlov", "89129876543", Role.ROLE_USER)),
+                            createMechanicUser("dmitriy@mail.com", "kozlov", "89129876543", Role.ROLE_USER)),
                     new Mechanic(null, "Екатерина", "Новикова", "Электроника",
                             6, "Да", "Гибридные и Электрические автомобили",
-                            createMechanicUser("ekaterina", "novikova", "89191237854", Role.ROLE_USER)),
+                            createMechanicUser("ekaterina@mail.com", "novikova", "89191237854", Role.ROLE_USER)),
                     new Mechanic(null, "Артем", "Петров", "Кузов",
                             3, "Нет", "Местные и Американские модели",
-                            createMechanicUser("artem", "petrov", "89196547898", Role.ROLE_USER)),
+                            createMechanicUser("artem@mail.com", "petrov", "89196547898", Role.ROLE_USER)),
                     new Mechanic(null, "Светлана", "Иванова", "Воздушно-охлаждающая система",
                             7, "Да", "Любые марки автомобилей",
-                            createMechanicUser("svetlana", "ivanova", "89234785690", Role.ROLE_USER))
+                            createMechanicUser("svetlana@mail.com", "ivanova", "89234785690", Role.ROLE_USER))
             );
 
             mechanicRepository.saveAll(mechanics);
         }
     }
+
     private User createMechanicUser(String login, String password, String phoneNumber, Role... roles) {
         User user = new User();
         user.setLogin(login);

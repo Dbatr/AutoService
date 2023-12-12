@@ -13,10 +13,6 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping("/registration")
-    public String registration() {
-        return "registration";
-    }
     @GetMapping("/hello")
     public String securityUrl() {
         return "hello";
