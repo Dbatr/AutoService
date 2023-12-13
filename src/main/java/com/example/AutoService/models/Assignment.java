@@ -28,5 +28,7 @@ public class Assignment {
     @JoinColumn(name = "OrderID", nullable = false)
     private Product product;
 
+
+
     // Constructors, getters, setters, and other necessary methods
 }

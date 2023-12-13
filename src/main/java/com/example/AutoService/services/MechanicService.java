@@ -1,18 +1,14 @@
 package com.example.AutoService.services;
 
-import com.example.AutoService.models.Assignment;
 import com.example.AutoService.models.Mechanic;
 import com.example.AutoService.models.User;
 import com.example.AutoService.models.enums.Role;
-import com.example.AutoService.repositories.AssignmentRepository;
 import com.example.AutoService.repositories.MechanicRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +24,9 @@ public class MechanicService {
 
         if (count == 0) {
             List<Mechanic> mechanics = Arrays.asList(
+                    new Mechanic(null, "Администратор", "админ", "админ",
+                            1, "Да", "админ",
+                            createMechanicUser("admin@gmail.com", "admin", "1", Role.ROLE_ADMIN)),
                     new Mechanic(null, "Алексей", "Смирнов", "Двигатель",
                             5, "Да", "Местные модели, Японские автомобили",
                             createMechanicUser("alexei@gmail.com", "smirnov", "89123456789", Role.ROLE_USER)),

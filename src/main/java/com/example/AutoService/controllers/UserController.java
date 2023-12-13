@@ -33,10 +33,7 @@ public class UserController {
         return "mechanic-profile"; // Имя вашего шаблона FreeMarker
     }
 
-    private Mechanic getCurrentMechanic() {
-        // Вам нужно определить, как получить информацию о текущем пользователе (механике)
-        // Это может быть из сессии, аутентификационного объекта и т.д.
-        // Предположим, что у вас есть метод getCurrentMechanic() в вашем сервисе аутентификации
+    public Mechanic getCurrentMechanic() {
         return mechanicService.getCurrentMechanic();
     }
 }

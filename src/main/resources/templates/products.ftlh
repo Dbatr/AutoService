@@ -23,14 +23,21 @@
     </form>
 
     <h2>Заказы для определенного механика:</h2>
-    <#list allAssignments as assignment>
-        <div>
-            <p>
-                Рабочий: ${assignment.mechanic.firstName} ${assignment.mechanic.lastName} выполняет в
-                ${assignment.workspace.workspaceName} задачу
-                ${assignment.product.description} от ${assignment.product.title}
-            </p>
-        </div>
+    <#list assignmentsForCurrentMechanic as assignment>
+        <#if !assignment.product.completed>
+            <div>
+                <p>
+                    Рабочий: ${assignment.mechanic.firstName} ${assignment.mechanic.lastName} выполняет в
+                    ${assignment.workspace.workspaceName} задачу
+                    ${assignment.product.description} от ${assignment.product.title}
+                </p>
+                <form action="/completeAssignment" method="post">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    <input type="hidden" name="assignmentId" value="${assignment.id}">
+                    <input type="submit" value="Заказ выполнен">
+                </form>
+            </div>
+        </#if>
     </#list>
     <h1>Все заказы:</h1>
     <#list products as product>

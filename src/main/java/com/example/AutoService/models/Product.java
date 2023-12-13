@@ -23,4 +23,6 @@ public class Product {
     @Column(name = "description", columnDefinition = "text")
     private String description;
 
+    @Column(name = "completed")
+    private boolean completed;
 }

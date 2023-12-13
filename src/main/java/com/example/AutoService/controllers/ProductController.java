@@ -2,9 +2,7 @@ package com.example.AutoService.controllers;
 
 import com.example.AutoService.models.Assignment;
 import com.example.AutoService.models.Mechanic;
-import com.example.AutoService.models.Product;
 import com.example.AutoService.services.AssignmentService;
-import com.example.AutoService.services.MechanicService;
 import com.example.AutoService.services.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,10 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,14 +21,19 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
     private final AssignmentService assignmentService;
-
+    private final UserController userController;
     @GetMapping("/")
     public String products(@RequestParam(name = "title", required = false) String title, Model model) {
         model.addAttribute("products", productService.listProducts(title));
 
-        // Add all assignments to the model
+        // Список всех назначений
         List<Assignment> allAssignments = assignmentService.getAllAssignments();
         model.addAttribute("allAssignments", allAssignments);
+
+        // Список определенных назначений, т.е. ля каждого механика выводятся свои заказы
+        List<Assignment> assignmentsForCurrentMechanic = assignmentService.getAssignmentsForCurrentMechanic();
+        model.addAttribute("assignmentsForCurrentMechanic", assignmentsForCurrentMechanic);
+
 
         // Add user information to the model
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -50,15 +50,16 @@ public class ProductController {
         return "product-info";
     }
 
-    @PostMapping("/product/create")
-    public String createProduct(Product product) {
-        productService.saveProduct(product);
-        return "redirect:/";
-    }
 
     @PostMapping("/product/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return "redirect:/";
+    }
+
+    @PostMapping("/completeAssignment")
+    public String completeAssignment(@RequestParam Long assignmentId, Model model) {
+        assignmentService.completeAssignment(assignmentId, model);
+        return "redirect:/"; // Перенаправление на главную страницу
     }
 }
