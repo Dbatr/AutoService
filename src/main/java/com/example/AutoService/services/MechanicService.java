@@ -6,6 +6,8 @@ import com.example.AutoService.models.User;
 import com.example.AutoService.models.enums.Role;
 import com.example.AutoService.repositories.AssignmentRepository;
 import com.example.AutoService.repositories.MechanicRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.RequiredArgsConstructor;
@@ -61,6 +63,15 @@ public class MechanicService {
 
     public Mechanic getMechanicById(Long id) {
         return mechanicRepository.findById(id).orElse(null);
+    }
+
+    public Mechanic getCurrentMechanic() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            User user = (User) authentication.getPrincipal();
+            return user.getMechanic();
+        }
+        return null;
     }
 
 }

@@ -5,8 +5,10 @@
 </head>
 <body>
 <h1>Профиль механика</h1>
-<p>Добро пожаловать, ${mechanic.firstName} ${mechanic.lastName}!</p>
-<!-- Отобразите детали профиля механика -->
-<!-- Добавьте другой контент при необходимости -->
+<p>Здравствуйте, ${mechanic.firstName} ${mechanic.lastName}!</p>
+<h1>Вот ваши умения:</h1>
+<p>Ваш опыт работы: ${mechanic.experienceYears} лет.</p>
+<p>Предпочитаемые бренды машин: ${mechanic.preferredCarBrands}.</p>
+<p>Ваша специализация: ${mechanic.specialization}.</p>
 </body>
 </html>
