@@ -2,6 +2,7 @@ package com.example.AutoService.controllers;
 
 import com.example.AutoService.models.Assignment;
 import com.example.AutoService.models.Mechanic;
+import com.example.AutoService.models.Product;
 import com.example.AutoService.services.AssignmentService;
 import com.example.AutoService.services.ProductService;
 import lombok.AllArgsConstructor;
@@ -62,4 +63,5 @@ public class ProductController {
         assignmentService.completeAssignment(assignmentId, model);
         return "redirect:/"; // Перенаправление на главную страницу
     }
+
 }

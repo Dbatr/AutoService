@@ -1,6 +1,5 @@
 package com.example.AutoService.config;
 
-import com.example.AutoService.services.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +21,7 @@ public class SecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests)  -> requests
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/", "/static/**", "/product/**", "/admin/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

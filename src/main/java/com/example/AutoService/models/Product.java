@@ -20,8 +20,14 @@ public class Product {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "last_name")
+    private String lastName;
+
     @Column(name = "description", columnDefinition = "text")
     private String description;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     @Column(name = "completed")
     private boolean completed;

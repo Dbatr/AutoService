@@ -34,36 +34,38 @@ public class ProductService {
     }
 
 
-    public void initializeProductData(){
+    public void initializeProductData() {
         long count = productRepository.count();
         if (count == 0) {
             List<Product> products = Arrays.asList(
-                    new Product(null, "Алексей", "Поменять резину", false),
-                    new Product(null, "Михаил", "Помыть машину", false),
-                    new Product(null, "Иван", "Заменить масло", false),
-                    new Product(null, "Ольга", "Проверить тормоза", false),
-                    new Product(null, "Павел", "Почистить фильтр воздуха", false),
-                    new Product(null, "Татьяна", "Покрасить капот", false),
-                    new Product(null, "Денис", "Провести диагностику двигателя", false),
-                    new Product(null, "Елена", "Заменить тормозные колодки", false),
-                    new Product(null, "Никита", "Проверить систему охлаждения", false),
-                    new Product(null, "Светлана", "Починить электропроводку", false),
-                    new Product(null, "Андрей", "Установить новый аккумулятор", false),
-                    new Product(null, "Мария", "Заменить фильтр топлива", false),
-                    new Product(null, "Григорий", "Полировка кузова", false),
-                    new Product(null, "Юлия", "Устранить звук в подвеске", false),
-                    new Product(null, "Сергей", "Проверить работу кондиционера", false),
-                    new Product(null, "Анастасия", "Заменить передние фары", false),
-                    new Product(null, "Дмитрий", "Почистить инжекторы", false),
-                    new Product(null, "Виктория", "Подкачать колесо", false),
-                    new Product(null, "Артем", "Проверить выхлопную систему", false),
-                    new Product(null, "Евгений", "Устранить треск в рулевой колонке", false),
-                    new Product(null, "Ксения", "Заменить ремень ГРМ", false)
+                    new Product(null, "Алексей", "Смирнов", "Поменять резину", "123456789", false),
+                    new Product(null, "Михаил", "Иванов", "Помыть машину", "987654321", false),
+                    new Product(null, "Иван", "Козлов", "Заменить масло", "555111333", false),
+                    new Product(null, "Ольга", "Новикова", "Проверить тормоза", "999888777", false),
+                    new Product(null, "Павел", "Петров", "Почистить фильтр воздуха", "444333222", false),
+                    new Product(null, "Татьяна", "Иванова", "Покрасить капот", "111222333", false),
+                    new Product(null, "Денис", "Смирнов", "Провести диагностику двигателя", "777888999", false),
+                    new Product(null, "Елена", "Козлова", "Заменить тормозные колодки", "333444555", false),
+                    new Product(null, "Никита", "Петров", "Проверить систему охлаждения", "666555444", false),
+                    new Product(null, "Светлана", "Иванова", "Починить электропроводку", "222333444", false),
+                    new Product(null, "Андрей", "Смирнов", "Установить новый аккумулятор", "888999000", false),
+                    new Product(null, "Мария", "Иванова", "Заменить фильтр топлива", "555444333", false),
+                    new Product(null, "Григорий", "Смирнов", "Полировка кузова", "000999888", false),
+                    new Product(null, "Юлия", "Петрова", "Устранить звук в подвеске", "777666555", false),
+                    new Product(null, "Сергей", "Иванов", "Проверить работу кондиционера", "222111000", false),
+                    new Product(null, "Анастасия", "Смирнова", "Заменить передние фары", "888777666", false),
+                    new Product(null, "Дмитрий", "Иванов", "Почистить инжекторы", "555666777", false),
+                    new Product(null, "Виктория", "Смирнова", "Подкачать колесо", "000111222", false),
+                    new Product(null, "Артем", "Иванов", "Проверить выхлопную систему", "777666555", false),
+                    new Product(null, "Евгений", "Смирнов", "Устранить треск в рулевой колонке", "222111000", false),
+                    new Product(null, "Ксения", "Иванова", "Заменить ремень ГРМ", "888999000", false)
             );
 
             productRepository.saveAll(products);
         }
-
     }
 
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 }

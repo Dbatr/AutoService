@@ -1,6 +1,7 @@
 package com.example.AutoService.services;
 
 import com.example.AutoService.models.Mechanic;
+import com.example.AutoService.models.Product;
 import com.example.AutoService.models.User;
 import com.example.AutoService.models.enums.Role;
 import com.example.AutoService.repositories.MechanicRepository;
@@ -71,6 +72,10 @@ public class MechanicService {
             return user.getMechanic();
         }
         return null;
+    }
+
+    public List<Object[]> getAllMechanics() {
+        return mechanicRepository.findAllSelectedColumns();
     }
 
 }

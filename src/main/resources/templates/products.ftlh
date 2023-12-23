@@ -2,10 +2,14 @@
 <html>
 <head>
     <title>Autoservice</title>
+    <style>
+
+
+
+    </style>
 </head>
 <body>
 <h1>Autoservice</h1>
-
 <#if user?has_content>
     <form action="/logout" method="post">
         <input type="hidden" name="_csrf" value="${_csrf.token}">
@@ -17,11 +21,6 @@
 </#if>
 <hr>
 <#if user?has_content>
-    <form action="/" method="get">
-        Поиск по имени: <input type="text" name="title"><br>
-        <input type="submit" value="Поиск"/>
-    </form>
-
     <h2>Заказы для определенного механика:</h2>
     <#list assignmentsForCurrentMechanic as assignment>
         <#if !assignment.product.completed>
