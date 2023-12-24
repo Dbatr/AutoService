@@ -31,10 +31,6 @@ public class ProductController {
         List<Assignment> allAssignments = assignmentService.getAllAssignments();
         model.addAttribute("allAssignments", allAssignments);
 
-        // Список определенных назначений, т.е. ля каждого механика выводятся свои заказы
-        List<Assignment> assignmentsForCurrentMechanic = assignmentService.getAssignmentsForCurrentMechanic();
-        model.addAttribute("assignmentsForCurrentMechanic", assignmentsForCurrentMechanic);
-
 
         // Add user information to the model
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -49,19 +45,6 @@ public class ProductController {
     public String productInfo(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getProductById(id));
         return "product-info";
-    }
-
-
-    @PostMapping("/product/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        productService.deleteProduct(id);
-        return "redirect:/";
-    }
-
-    @PostMapping("/completeAssignment")
-    public String completeAssignment(@RequestParam Long assignmentId, Model model) {
-        assignmentService.completeAssignment(assignmentId, model);
-        return "redirect:/"; // Перенаправление на главную страницу
     }
 
 }

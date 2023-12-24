@@ -6,7 +6,6 @@ import com.example.AutoService.models.Product;
 import com.example.AutoService.models.Workspace;
 import com.example.AutoService.repositories.AssignmentRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.*;
 
@@ -33,7 +32,6 @@ public class AssignmentService {
                     mechanicService.getMechanicById(3L),
                     mechanicService.getMechanicById(4L),
                     mechanicService.getMechanicById(5L),
-                    mechanicService.getMechanicById(6L),
                     mechanicService.getMechanicById(5L)
                     // Добавьте других механиков, если необходимо
             );
@@ -75,25 +73,14 @@ public class AssignmentService {
             }
         }
     }
+
+
     public List<Assignment> getAllAssignments() {
         return assignmentRepository.findAll();
     }
-    public List<Assignment> getAssignmentsForCurrentMechanic() {
-        Mechanic currentMechanic = mechanicService.getCurrentMechanic();
-        if (currentMechanic != null) {
-            return assignmentRepository.findByMechanic(currentMechanic);
-        }
-        return Collections.emptyList();
-    }
 
-
-    public void completeAssignment(Long assignmentId, Model model) {
-        Optional<Assignment> optionalAssignment = assignmentRepository.findById(assignmentId);
-        optionalAssignment.ifPresent(assignment -> {
-            assignment.getProduct().setCompleted(true);
-            assignmentRepository.save(assignment);
-            // Обновляем список заказов в модели
-            model.addAttribute("assignmentsForCurrentMechanic", getAssignmentsForCurrentMechanic());
-        });
+    public void createAssignment(Assignment assignment) {
+        // Добавьте любую дополнительную логику или валидацию при необходимости
+        assignmentRepository.save(assignment);
     }
 }

@@ -31,4 +31,8 @@ public class WorkspaceService {
     public Workspace getWorkspaceById(Long id) {
         return workspaceRepository.findById(id).orElse(null);
     }
+
+    public List<Workspace> getAllWorkspaces() {
+        return workspaceRepository.findAll();
+    }
 }

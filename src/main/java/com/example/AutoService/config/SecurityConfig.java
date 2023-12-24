@@ -21,14 +21,15 @@ public class SecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests)  -> requests
-                        .requestMatchers("/", "/static/**", "/product/**", "/admin/**").permitAll()
+                        .requestMatchers("/", "/product/**", "/admin/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll);
+                .logout(LogoutConfigurer::permitAll)
+                .csrf(csrf -> csrf.disable()); // отключение CSRF-защиты
 
         return http.build();
     }
