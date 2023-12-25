@@ -48,6 +48,17 @@ public class AdminController {
         return workspaceService.getAllWorkspaces();
     }
 
+    @GetMapping("/workspaces/{workspaceId}")
+    public ResponseEntity<Workspace> getWorkspaceById(@PathVariable Long workspaceId) {
+        Workspace workspace = workspaceService.getWorkspaceById(workspaceId);
+
+        if (workspace != null) {
+            return new ResponseEntity<>(workspace, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/orders")
     public List<Product> getAllOrdersForAdmin() {
         return productService.getAllProducts();
