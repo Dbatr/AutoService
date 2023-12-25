@@ -47,4 +47,7 @@ public class MechanicService {
         return mechanicRepository.findAll();
     }
 
+    public void createMechanic(Mechanic mechanic) {
+        mechanicRepository.save(mechanic);
+    }
 }

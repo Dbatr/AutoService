@@ -83,4 +83,8 @@ public class AssignmentService {
         // Добавьте любую дополнительную логику или валидацию при необходимости
         assignmentRepository.save(assignment);
     }
+
+    public Assignment getAssignmentById(Long assignmentId) {
+        return assignmentRepository.findById(assignmentId).orElse(null);
+    }
 }
