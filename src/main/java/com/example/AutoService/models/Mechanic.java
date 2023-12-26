@@ -30,7 +30,7 @@ public class Mechanic {
     private int experienceYears;
 
     @Column(name = "OnDuty")
-    private String onDuty;
+    private boolean onDuty;
 
     @Column(name = "PreferredCarBrands")
     private String preferredCarBrands;

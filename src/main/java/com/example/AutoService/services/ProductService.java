@@ -16,7 +16,7 @@ import java.util.*;
 @Slf4j
 @RequiredArgsConstructor
 public class ProductService {
-    @Autowired
+
     private final ProductRepository productRepository;
 
     //получение списка продуктов
@@ -25,10 +25,6 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    // удаление продукта
-    public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
-    }
 
     // Получение доп. информации о продукте
     public Product getProductById(Long id) {
@@ -73,5 +69,18 @@ public class ProductService {
 
     public void createProduct(Product product) {
         productRepository.save(product);
+    }
+
+    public boolean updateProductStatus(Long productId, boolean completed) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            product.setCompleted(completed);
+            productRepository.save(product);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

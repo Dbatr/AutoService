@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -17,6 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    // Инициализация данных пользователей
     public void initializeUserData() {
         long count = userRepository.count();
         if (count == 0) {
@@ -27,11 +29,23 @@ public class UserService {
             userRoles.add(Role.ROLE_USER);
 
             User adminUser = new User(null, "admin@mail.com", passwordEncoder.encode("admin"),
+                    "Администратор", "Administ",
                     "89993331234", true, adminRoles);
             User regularUser1 = new User(null, "user@mail.com", passwordEncoder.encode("user"),
+                    "Администратор2", "Второй",
                     "89093214569", true, userRoles);
 
             userRepository.saveAll(Arrays.asList(adminUser, regularUser1));
         }
+    }
+
+    // Получение всех пользователей
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    // Получение пользователя по ID
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 }
