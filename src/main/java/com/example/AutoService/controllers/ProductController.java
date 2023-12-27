@@ -1,50 +1,55 @@
 package com.example.AutoService.controllers;
 
-import com.example.AutoService.models.Assignment;
-import com.example.AutoService.models.Mechanic;
 import com.example.AutoService.models.Product;
-import com.example.AutoService.services.AssignmentService;
 import com.example.AutoService.services.ProductService;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//Методы для обработки запросов
-@Controller
-@Data
+@RestController
 @AllArgsConstructor
+@RequestMapping("/autoservice")
 public class ProductController {
+
     private final ProductService productService;
-    private final AssignmentService assignmentService;
-    private final UserController userController;
-    @GetMapping("/")
-    public String products(@RequestParam(name = "title", required = false) String title, Model model) {
-        model.addAttribute("products", productService.listProducts(title));
 
-        // Список всех назначений
-        List<Assignment> allAssignments = assignmentService.getAllAssignments();
-        model.addAttribute("allAssignments", allAssignments);
+    // Получение всех заказов (продуктов)
+    @GetMapping("/orders")
+    public List<Product> getAllOrdersForAdmin() {
+        return productService.getAllProducts();
+    }
 
+    // Получение заказа (продукта) по ID
+    @GetMapping("/orders/{orderId}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long orderId) {
+        Product product = productService.getProductById(orderId);
 
-        // Add user information to the model
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
-            model.addAttribute("user", authentication.getPrincipal());
+        if (product != null) {
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-        return "products";
     }
 
-    @GetMapping("/product/{id}")
-    public String productInfo(@PathVariable Long id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
-        return "product-info";
+    // Обновление статуса заказа (помечается как выполненный)
+    @PatchMapping("/orders/{orderId}/complete")
+    public ResponseEntity<String> completeProduct(@PathVariable Long orderId) {
+        boolean updated = productService.updateProductStatus(orderId, true);
+
+        if (updated) {
+            return new ResponseEntity<>("Product status updated successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+        }
     }
 
+    // Добавление нового заказа (продукта)
+    @PostMapping("/addOrder")
+    public String createProduct(@RequestBody Product product) {
+        productService.createProduct(product);
+        return "Product added";
+    }
 }
