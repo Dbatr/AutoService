@@ -19,7 +19,7 @@ public class Product {
     private Long id;
 
     // Имя клиента, размещающего заказ
-    @Column(name = "title")
+    @Column(name = "first_name")
     private String title;
 
     // Фамилия клиента, размещающего заказ
