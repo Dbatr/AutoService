@@ -122,6 +122,144 @@
   - **Параметры запроса**: ID рабочего места.
   - **Ожидаемый ответ**: Объект рабочего места.
 
+### Примеры данных
+
+Пример данных, полученных при запросе GET /autoservice/assignments:
+
+```json
+[
+    {
+        "id": 1,
+        "mechanic": {
+            "id": 2,
+            "firstName": "Дмитрий",
+            "lastName": "Козлов",
+            "specialization": "Подвеска",
+            "experienceYears": 8,
+            "onDuty": false,
+            "preferredCarBrands": "Немецкие, Французские и Итальянские автомобили"
+        },
+        "workspace": {
+            "id": 3,
+            "workspaceName": "Подъемник 1",
+            "numberOfWorkplaces": 4,
+            "availability": "Занят",
+            "workType": "Простая работа",
+            "requirements": "Основные инструменты"
+        },
+        "product": {
+            "id": 4,
+            "title": "Ольга",
+            "lastName": "Новикова",
+            "description": "Проверить тормоза",
+            "phoneNumber": "999888777",
+            "completed": false
+        }
+    },
+    ...
+]
+```
+
+Пример данных, полученных при запросе GET /autoservice/mechanics:
+```
+[
+  {
+    "id": 1,
+    "firstName": "Алексей",
+    "lastName": "Смирнов",
+    "specialization": "Двигатель",
+    "experienceYears": 5,
+    "onDuty": true,
+    "preferredCarBrands": "Местные модели, Японские автомобили"
+  },
+  {
+    "id": 2,
+    "firstName": "Дмитрий",
+    "lastName": "Козлов",
+    "specialization": "Подвеска",
+    "experienceYears": 8,
+    "onDuty": false,
+    "preferredCarBrands": "Немецкие, Французские и Итальянские автомобили"
+  },
+    ...
+]
+```
+
+Пример данных, полученных при запросе GET /autoservice/users:
+```
+[
+    {
+        "id": 1,
+        "login": "admin@mail.com",
+        "password": "$2a$08$dysgE1VFRc0WpbLgpMrp5.eMmBbOBoBulkMFOGDh.NpyT2RBq84h.",
+        "firstName": "Администратор",
+        "lastName": "Administ",
+        "phoneNumber": "89993331234",
+        "active": true,
+        "roles": [
+            "ROLE_ADMIN"
+        ],
+        "enabled": true,
+        "username": "admin@mail.com",
+        "authorities": [
+            "ROLE_ADMIN"
+        ],
+        "accountNonLocked": true,
+        "accountNonExpired": true,
+        "credentialsNonExpired": true
+    },
+    ...
+]
+```
+
+
+Пример данных, полученных при запросе GET /autoservice/orders:
+```
+[
+    {
+        "id": 1,
+        "title": "Алексей",
+        "lastName": "Смирнов",
+        "description": "Поменять резину",
+        "phoneNumber": "123456789",
+        "completed": false
+    },
+    {
+        "id": 2,
+        "title": "Михаил",
+        "lastName": "Иванов",
+        "description": "Помыть машину",
+        "phoneNumber": "987654321",
+        "completed": true
+    },
+    ...
+]
+```
+
+Пример данных, полученных при запросе GET /autoservice/workspaces:
+
+```json
+[
+  {
+    "id": 1,
+    "workspaceName": "Главный Бокс",
+    "numberOfWorkplaces": 4,
+    "availability": "Свободен",
+    "workType": "Серьезная работа",
+    "requirements": "Подходить для любой работы"
+  },
+  {
+    "id": 2,
+    "workspaceName": "Большой Бокс",
+    "numberOfWorkplaces": 5,
+    "availability": "Занят",
+    "workType": "Трудная работа",
+    "requirements": "Множество услуг"
+  },
+    ...
+]
+```
+
 ## Модели
 
 ### Assignment
