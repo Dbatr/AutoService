@@ -1,17 +1,16 @@
 package com.example.AutoService.services;
 
-import com.example.AutoService.models.Assignment;
-import com.example.AutoService.models.Mechanic;
 import com.example.AutoService.models.Product;
 import com.example.AutoService.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-//методы для обработки бизнес-логики
+/**
+ * Сервис для обработки бизнес-логики, связанной с продуктами (заявками).
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -19,19 +18,20 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    //получение списка продуктов
-    public List<Product> listProducts(String title) {
-        if (title != null) return productRepository.findByTitle(title);
-        return productRepository.findAll();
-    }
-
-
-    // Получение доп. информации о продукте
+    /**
+     * Получение дополнительной информации о продукте (заявке) по его идентификатору.
+     *
+     * @param id Идентификатор продукта (заявки).
+     * @return Продукт (заявка) или null, если не найден.
+     */
     public Product getProductById(Long id) {
         return productRepository.findById(id).orElse(null);
     }
 
-
+    /**
+     * Инициализация данных для продуктов (заявок).
+     * Если в репозитории нет продуктов, создает и сохраняет список тестовых продуктов.
+     */
     public void initializeProductData() {
         long count = productRepository.count();
         if (count == 0) {
@@ -63,14 +63,31 @@ public class ProductService {
         }
     }
 
+    /**
+     * Получение списка всех продуктов (заявок).
+     *
+     * @return Список всех продуктов (заявок).
+     */
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
+    /**
+     * Создание нового продукта (заявки) и сохранение его в репозитории.
+     *
+     * @param product Новый продукт (заявка) для сохранения.
+     */
     public void createProduct(Product product) {
         productRepository.save(product);
     }
 
+    /**
+     * Обновление статуса выполнения продукта (заявки).
+     *
+     * @param productId Идентификатор продукта (заявки).
+     * @param completed Новый статус выполнения продукта (true, если выполнено, иначе false).
+     * @return true, если обновление прошло успешно, иначе false.
+     */
     public boolean updateProductStatus(Long productId, boolean completed) {
         Optional<Product> optionalProduct = productRepository.findById(productId);
 

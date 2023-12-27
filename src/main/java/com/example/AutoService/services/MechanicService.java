@@ -1,23 +1,24 @@
 package com.example.AutoService.services;
 
 import com.example.AutoService.models.Mechanic;
-import com.example.AutoService.models.User;
-import com.example.AutoService.models.enums.Role;
 import com.example.AutoService.repositories.MechanicRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Сервис для обработки бизнес-логики, связанной с механиками.
+ */
 @Service
 @RequiredArgsConstructor
 public class MechanicService {
     private final MechanicRepository mechanicRepository;
 
-    // Инициализация данных механиков
+    /**
+     * Метод для инициализации данных механиков.
+     */
     public void initializeMechanicsData() {
         long count = mechanicRepository.count();
 
@@ -40,22 +41,41 @@ public class MechanicService {
         }
     }
 
-    // Получение механика по ID
+    /**
+     * Получение механика по ID.
+     *
+     * @param id ID механика.
+     * @return Механик с указанным ID или null, если не найден.
+     */
     public Mechanic getMechanicById(Long id) {
         return mechanicRepository.findById(id).orElse(null);
     }
 
-    // Получение всех механиков
+    /**
+     * Получение всех механиков.
+     *
+     * @return Список всех механиков.
+     */
     public List<Mechanic> getAllMechanics() {
         return mechanicRepository.findAll();
     }
 
-    // Создание нового механика
+    /**
+     * Создание нового механика.
+     *
+     * @param mechanic Новый механик.
+     */
     public void createMechanic(Mechanic mechanic) {
         mechanicRepository.save(mechanic);
     }
 
-    // Обновление статуса onDuty у механика
+    /**
+     * Обновление статуса onDuty у механика.
+     *
+     * @param mechanicId ID механика.
+     * @param onDuty     Новый статус onDuty.
+     * @return true, если обновление успешно, иначе false.
+     */
     public boolean updateMechanicOnDuty(Long mechanicId, boolean onDuty) {
         Optional<Mechanic> optionalMechanic = mechanicRepository.findById(mechanicId);
 

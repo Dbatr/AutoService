@@ -36,25 +36,32 @@ public class SecurityConfig{
 //        return http.build();
 //    }
 
+    // Bean для настройки SecurityFilterChain
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // Отключаем CSRF (Cross-Site Request Forgery) защиту, так как приложение использует JWT
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests)  -> requests
-                        .requestMatchers("/", "/product/**", "/autoservice/**").permitAll()
+                        // Разрешаем доступ без аутентификации для определенных URL-ов
+                        .requestMatchers("/", "/autoservice/**").permitAll()
+                        // Для всех остальных запросов требуем аутентификацию
                         .anyRequest().authenticated()
                 )
                 .sessionManagement((session) -> session
+                        // Устанавливаем политику управления сессиями в STATELESS, так как мы используем токены
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
         return http.build();
     }
 
+    // Bean для настройки AuthenticationManager
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    // Bean для настройки PasswordEncoder (в данном случае, BCryptPasswordEncoder)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(8);

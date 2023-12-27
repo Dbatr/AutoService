@@ -5,28 +5,28 @@ import com.example.AutoService.models.Mechanic;
 import com.example.AutoService.models.Product;
 import com.example.AutoService.models.Workspace;
 import com.example.AutoService.repositories.AssignmentRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@AllArgsConstructor
 public class AssignmentService {
     private final AssignmentRepository assignmentRepository;
     private final MechanicService mechanicService;
     private final WorkspaceService workspaceService;
     private final ProductService productService;
 
-    public AssignmentService(AssignmentRepository assignmentRepository, MechanicService mechanicService, WorkspaceService workspaceService, ProductService productService) {
-        this.assignmentRepository = assignmentRepository;
-        this.mechanicService = mechanicService;
-        this.workspaceService = workspaceService;
-        this.productService = productService;
-    }
-
+    /**
+     * Инициализация данных для заданий.
+     * Проверяет, есть ли уже задания в репозитории.
+     * Если заданий нет, создает списки механиков, рабочих мест и продуктов по их ID,
+     * а затем создает и сохраняет объекты Assignment для уникальных комбинаций механиков, рабочих мест и продуктов.
+     */
     public void initializeAssignmentsData() {
         if (assignmentRepository.count() == 0) {
             // Получаем коллекции механиков, рабочих мест и продуктов по их ID
-            // Здесь вы должны предоставить методы получения коллекций по необходимости
             List<Mechanic> mechanics = Arrays.asList(
                     mechanicService.getMechanicById(2L),
                     mechanicService.getMechanicById(3L),
@@ -74,16 +74,30 @@ public class AssignmentService {
         }
     }
 
-
+    /**
+     * Получение списка всех заданий.
+     *
+     * @return Список всех заданий.
+     */
     public List<Assignment> getAllAssignments() {
         return assignmentRepository.findAll();
     }
 
+    /**
+     * Создание нового задания и сохранение его в репозитории.
+     *
+     * @param assignment Новое задание для сохранения.
+     */
     public void createAssignment(Assignment assignment) {
-        // Добавьте любую дополнительную логику или валидацию при необходимости
         assignmentRepository.save(assignment);
     }
 
+    /**
+     * Получение задания по его уникальному идентификатору.
+     *
+     * @param assignmentId Уникальный идентификатор задания.
+     * @return Задание или null, если не найдено.
+     */
     public Assignment getAssignmentById(Long assignmentId) {
         return assignmentRepository.findById(assignmentId).orElse(null);
     }

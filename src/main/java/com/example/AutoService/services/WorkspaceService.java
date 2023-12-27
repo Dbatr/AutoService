@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+
+/**
+ * Сервис для обработки бизнес-логики, связанной с рабочими местами (подъемниками).
+ */
 @Service
 public class WorkspaceService {
     private final WorkspaceRepository workspaceRepository;
@@ -14,6 +18,10 @@ public class WorkspaceService {
         this.workspaceRepository = workspaceRepository;
     }
 
+    /**
+     * Инициализация данных для рабочих мест (подъемников).
+     * Если в репозитории нет рабочих мест, создает и сохраняет список тестовых рабочих мест.
+     */
     public void initializeWorkspacesData() {
         if (workspaceRepository.count() == 0) {
             List<Workspace> workspaces = Arrays.asList(
@@ -28,10 +36,21 @@ public class WorkspaceService {
         }
     }
 
+    /**
+     * Получение информации о рабочем месте (подъемнике) по его идентификатору.
+     *
+     * @param id Идентификатор рабочего места (подъемника).
+     * @return Рабочее место (подъемник) или null, если не найдено.
+     */
     public Workspace getWorkspaceById(Long id) {
         return workspaceRepository.findById(id).orElse(null);
     }
 
+    /**
+     * Получение списка всех рабочих мест (подъемников).
+     *
+     * @return Список всех рабочих мест (подъемников).
+     */
     public List<Workspace> getAllWorkspaces() {
         return workspaceRepository.findAll();
     }
