@@ -42,6 +42,7 @@ public class SecurityConfig{
         http
                 // Отключаем CSRF (Cross-Site Request Forgery) защиту, так как приложение использует JWT
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests)  -> requests
                         // Разрешаем доступ без аутентификации для определенных URL-ов
                         .requestMatchers("/", "/autoservice/**").permitAll()

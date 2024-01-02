@@ -46,6 +46,18 @@ public class ProductController {
         }
     }
 
+    // Обновление статуса заказа (помечается как невыполненный)
+    @PatchMapping("/orders/{orderId}/uncomplete")
+    public ResponseEntity<String> uncompleteProduct(@PathVariable Long orderId) {
+        boolean updated = productService.updateProductStatus(orderId, false);
+
+        if (updated) {
+            return new ResponseEntity<>("Product status updated successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
     // Добавление нового заказа (продукта)
     @PostMapping("/addOrder")
     public String createProduct(@RequestBody Product product) {
