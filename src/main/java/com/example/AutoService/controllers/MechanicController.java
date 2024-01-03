@@ -64,4 +64,18 @@ public class MechanicController {
         mechanicService.createMechanic(mechanic);
         return "Mechanic added";
     }
+
+    // Изменение количества лет опыта работы механика
+    @PatchMapping("/mechanics/{mechanicId}/updateExperienceYears/{newExperienceYears}")
+    public ResponseEntity<String> updateExperienceYears(@PathVariable Long mechanicId,
+                                                        @PathVariable int newExperienceYears) {
+        boolean updated = mechanicService.updateExperienceYears(mechanicId, newExperienceYears);
+
+        if (updated) {
+            return new ResponseEntity<>("Experience years updated", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Mechanic not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

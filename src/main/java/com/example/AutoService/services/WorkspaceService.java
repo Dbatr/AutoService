@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Сервис для обработки бизнес-логики, связанной с рабочими местами (подъемниками).
@@ -53,5 +54,18 @@ public class WorkspaceService {
      */
     public List<Workspace> getAllWorkspaces() {
         return workspaceRepository.findAll();
+    }
+
+    // Метод для изменения количества рабочих мест
+    public Workspace updateNumberOfWorkplaces(Long workspaceId, Integer newNumberOfWorkplaces) {
+        Optional<Workspace> optionalWorkspace = workspaceRepository.findById(workspaceId);
+
+        if (optionalWorkspace.isPresent()) {
+            Workspace workspace = optionalWorkspace.get();
+            workspace.setNumberOfWorkplaces(newNumberOfWorkplaces);
+            return workspaceRepository.save(workspace);
+        }
+
+        return null;
     }
 }

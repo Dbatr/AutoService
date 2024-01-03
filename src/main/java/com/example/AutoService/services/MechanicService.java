@@ -88,4 +88,17 @@ public class MechanicService {
 
         return false;
     }
+
+    public boolean updateExperienceYears(Long mechanicId, int newExperienceYears) {
+        Optional<Mechanic> optionalMechanic = mechanicRepository.findById(mechanicId);
+
+        if (optionalMechanic.isPresent()) {
+            Mechanic mechanic = optionalMechanic.get();
+            mechanic.setExperienceYears(newExperienceYears);
+            mechanicRepository.save(mechanic);
+            return true;
+        }
+
+        return false;
+    }
 }
