@@ -40,7 +40,7 @@ public class ProductController {
         boolean updated = productService.updateProductStatus(orderId, true);
 
         if (updated) {
-            return new ResponseEntity<>("Product status updated successfully", HttpStatus.OK);
+            return new ResponseEntity<>("Order status updated successfully", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
         }
